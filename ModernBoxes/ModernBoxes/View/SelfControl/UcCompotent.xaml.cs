@@ -1,4 +1,5 @@
 ﻿using ModernBoxes.ViewModel;
+using System;
 using System.Windows.Controls;
 
 namespace ModernBoxes.View.SelfControl
@@ -12,6 +13,12 @@ namespace ModernBoxes.View.SelfControl
         {
             InitializeComponent();
             this.DataContext = new UcCompontentViewModel();
+        }
+
+        private void UserControl_PreviewMouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
+        {
+            Console.WriteLine(ScrollViewer.VerticalOffset + "  " + e.Delta);
+            ScrollViewer.ScrollToVerticalOffsetWithAnimation(ScrollViewer.VerticalOffset - e.Delta);
         }
     }
 }
