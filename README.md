@@ -1,6 +1,6 @@
 
 
-# ModernBoxes(木函)
+# ModernBoxe(木函)
 
 ##  什么是木函
 
@@ -17,7 +17,13 @@
 * 操作系统：Windows8及以上，win11效果更加
 * 程序运行环境：.NET 5
 
-## 简单的效果图
+
+
+## 下载
+
+[ModernBox](http://mchblog.gitee.io/modern-box/#)
+
+## 使用方法
 
 #### 将木函固定到桌面上
 
