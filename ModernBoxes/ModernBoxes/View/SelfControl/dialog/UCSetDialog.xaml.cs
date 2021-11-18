@@ -47,6 +47,18 @@ namespace ModernBoxes.View.SelfControl.dialog
                     RB_NotAutoOpen.IsChecked = true;
                 }
             }
+
+            Theme theme = (Theme)Enum.Parse(typeof(Theme), ConfigHelper.getConfig("theme"));
+            if (theme == Theme.light)
+            {
+                RB_light.IsChecked = true;
+                RB_Dark.IsChecked = false;
+            }
+            else
+            {
+                RB_Dark.IsChecked = true;
+                RB_light.IsChecked = false;
+            }
         }
 
         /// <summary>
@@ -56,7 +68,7 @@ namespace ModernBoxes.View.SelfControl.dialog
         /// <param name="e"></param>
         private void RB_light_Click(object sender, RoutedEventArgs e)
         {
-            ChangeTheme(true);
+            ChangeTheme.SetTheme(Theme.light);
         }
 
         /// <summary>
@@ -66,36 +78,10 @@ namespace ModernBoxes.View.SelfControl.dialog
         /// <param name="e"></param>
         private void RB_Dark_Click(object sender, RoutedEventArgs e)
         {
-            ChangeTheme(false);
+            ChangeTheme.SetTheme(Theme.dark);   
         }
 
-        /// <summary>
-        /// 切换主题
-        /// </summary>
-        /// <param name="bol"></param>
-        public void ChangeTheme(Boolean bol)
-        {
-            if (bol)
-            {
-                Application.Current.Resources.MergedDictionaries.Remove(Application.Current.Resources.MergedDictionaries.FirstOrDefault(o =>
-                    o.Source == new Uri("pack://application:,,,/HandyControl;component/Themes/SkinDark.xaml")
-                ));
-                Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary()
-                {
-                    Source = new Uri("pack://application:,,,/HandyControl;component/Themes/SkinDefault.xaml")
-                });
-            }
-            else
-            {
-                Application.Current.Resources.MergedDictionaries.Remove(Application.Current.Resources.MergedDictionaries.FirstOrDefault(o =>
-                    o.Source == new Uri("pack://application:,,,/HandyControl;component/Themes/SkinDefault.xaml")
-                ));
-                Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary()
-                {
-                    Source = new Uri("pack://application:,,,/HandyControl;component/Themes/SkinDark.xaml")
-                });
-            }
-        }
+        
 
         /// <summary>
         /// 组件应用布局

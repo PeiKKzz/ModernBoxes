@@ -81,11 +81,9 @@ namespace ModernBoxes
             this.ShowInTaskbar = false;
             //ViewModel注册消息
             Messenger.Default.Register<Boolean>(this, "isShow", ShowCardApplaction);
-
             loadComment();
-
-
-          
+            //设置主题颜色
+            ChangeTheme.SetTheme((Theme)Enum.Parse(typeof(MyEnum.Theme), ConfigHelper.getConfig("theme")));
         }
 
         /// <summary>
@@ -113,6 +111,8 @@ namespace ModernBoxes
                 CardApps.Add(new CardContentModel() { CardName = "便签", IsChecked = false, CardID = 4, CardHeight = 235, Priview = "/Resource/image/previews/notes1.png" });
                 string CardJson = JsonConvert.SerializeObject(CardApps);
                 await FileHelper.WriteFile($"{Environment.CurrentDirectory}\\AllCardsConfig.json", CardJson);
+                //设置默认主题为光明色
+                ConfigHelper.setConfig("theme",MyEnum.Theme.light);
             }
         }
 

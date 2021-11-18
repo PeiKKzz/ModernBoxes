@@ -13,7 +13,15 @@ namespace ModernBoxes.Tool.convert
             if (value.ToString() == "组件应用")
             {
                 //返回组件应用的图标
-                return new BitmapImage(new Uri(@"\Resource\image\menu.png", UriKind.Relative));
+                String theme = ConfigHelper.getConfig("theme");
+                if ((MyEnum.Theme)Enum.Parse(typeof(MyEnum.Theme), theme) == MyEnum.Theme.light)
+                {
+                    return new BitmapImage(new Uri(@"\Resource\image\menu.png", UriKind.Relative));
+                }
+                else
+                {
+                    return new BitmapImage(new Uri(@"\Resource\image\menuindark.png", UriKind.Relative));
+                }
             }
             else if (value.ToString().Substring(value.ToString().LastIndexOf('.') + 1) == "ico")
             {

@@ -25,6 +25,7 @@
     <None Remove="Resource\image\image.png" />
     <None Remove="Resource\image\link.png" />
     <None Remove="Resource\image\menu.png" />
+    <None Remove="Resource\image\menuindark.png" />
     <None Remove="Resource\image\music.png" />
     <None Remove="Resource\image\normal.png" />
     <None Remove="Resource\image\pdf.png" />
@@ -195,6 +196,12 @@
     <Content Include="TempDirConfig.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resource\image\menuindark.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
