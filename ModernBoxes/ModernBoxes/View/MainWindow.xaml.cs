@@ -83,6 +83,9 @@ namespace ModernBoxes
             Messenger.Default.Register<Boolean>(this, "isShow", ShowCardApplaction);
 
             loadComment();
+
+
+          
         }
 
         /// <summary>
