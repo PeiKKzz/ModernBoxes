@@ -11,6 +11,7 @@
         Background="Transparent"
         WindowStyle="None"
         AllowsTransparency="True"
+        
         x:Name="window"
         Title="MainWindow" Height="1000" Width="1400">
     <Window.Resources>
@@ -38,7 +39,7 @@
                         hc:BorderElement.CornerRadius="8"
                         Name="MiddleWindow"
                         Width="{Binding ElementName=Toggle,Path=IsChecked,Converter={StaticResource toconvert}}"
-                        Background="White" Effect="{StaticResource EffectShadow1}">
+                        Background="{DynamicResource RegionBrush}" Effect="{StaticResource EffectShadow1}">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition />
