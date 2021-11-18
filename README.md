@@ -57,6 +57,20 @@
 
 ![](image/5.png)
 
+
+
+#### 切换新版本后如何回复数据
+
+1. 将旧版本软件目录下的
+
+   * `AllCardsConfig.json`
+   * `MenuConfig.json`
+   * `TempDirConfig.json`
+   * `TempFileConfig.json`
+   * `UsedApplicationConfig.json`
+
+   文件复制并替换新软件目录下即可
+
 ## 更新
 
 ##### 2021/11/7 更新
@@ -94,5 +108,13 @@
 ![](image/11.gif)
 
 **如果你喜欢这个项目请给予我一些支持，一个小小的Star足矣**
+
+
+
+##### 2021/11/12
+
+增加黑暗模式
+
+![](image/12.gif)
 
 **项目支持：HandyControl**
