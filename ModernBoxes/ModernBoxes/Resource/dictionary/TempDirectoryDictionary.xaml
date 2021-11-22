@@ -26,6 +26,7 @@
                                 DockPanel.Dock="Bottom"
                                 Text="{Binding TempDirPath,Converter={StaticResource con}}"
                                 MaxWidth="60"
+                                Style="{StaticResource TextBlockDefault}"
                                 VerticalAlignment="Bottom"
                                 HorizontalAlignment="Center"
                                 TextWrapping="NoWrap" />

@@ -27,6 +27,7 @@
                                 DockPanel.Dock="Bottom"
                                 Text="{Binding FilePath,Converter={StaticResource getFileName}}"
                                 MaxWidth="60"
+                                Style="{StaticResource TextBlockDefault}"
                                 VerticalAlignment="Bottom"
                                 HorizontalAlignment="Center"
                                 TextWrapping="NoWrap" />
