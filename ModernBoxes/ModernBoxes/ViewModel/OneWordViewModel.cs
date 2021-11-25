@@ -6,6 +6,7 @@ using ModernBoxes.View.SelfControl.dialog;
 using Newtonsoft.Json;
 using RestSharp;
 using System;
+using System.Threading.Tasks;
 
 namespace ModernBoxes.ViewModel
 {
@@ -35,7 +36,7 @@ namespace ModernBoxes.ViewModel
             loadOneNote();
         }
 
-        private async void loadOneNote()
+        private async Task loadOneNote()
         {
             try
             {
@@ -46,6 +47,10 @@ namespace ModernBoxes.ViewModel
                 if (response != null)
                 {
                     OneWord = JsonConvert.DeserializeObject<OneWordModel>(response.Content);
+                    if (response.StatusCode != System.Net.HttpStatusCode.OK)
+                    {
+                        await loadOneNote();
+                    }
                 }
             }
             catch (Exception ex)

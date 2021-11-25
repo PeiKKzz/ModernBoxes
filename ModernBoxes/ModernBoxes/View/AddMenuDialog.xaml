@@ -1,18 +1,21 @@
-﻿<Window x:Class="ModernBoxes.View.AddMenuDialog"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:hc="https://handyorg.github.io/handycontrol"
-        WindowStartupLocation="CenterScreen"
-        WindowStyle="None"
-        AllowsTransparency="True"
-        MouseLeftButtonDown="Window_MouseLeftButtonDown_To_Drave"
-        mc:Ignorable="d"
-        Name="MenuDialog"
-        ResizeMode="NoResize"
-        Background="Transparent"
-        Title="AddMenuDialog" Height="240" Width="400">
+﻿<Window
+    x:Class="ModernBoxes.View.AddMenuDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:hc="https://handyorg.github.io/handycontrol"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Name="MenuDialog"
+    Title="AddMenuDialog"
+    Width="400"
+    Height="240"
+    AllowsTransparency="True"
+    Background="Transparent"
+    MouseLeftButtonDown="Window_MouseLeftButtonDown_To_Drave"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -21,18 +24,37 @@
         </ResourceDictionary>
     </Window.Resources>
     <hc:TransitioningContentControl>
-        <hc:Card hc:BorderElement.CornerRadius="20" Margin="5" Effect="{StaticResource EffectShadow1}">
+        <hc:Card
+            Margin="5"
+            hc:BorderElement.CornerRadius="20"
+            Effect="{StaticResource EffectShadow1}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <TextBlock Text="添加" FontWeight="Bold" VerticalAlignment="Center" Margin="16 0 0 0" FontSize="20" />
-                <!--关闭按钮-->
-                <Button Height="40" HorizontalAlignment="Right"  Width="40" FontSize="20" Style="{StaticResource closeStyle}" Command="{Binding CloseDialog}" CommandParameter="{Binding ElementName=MenuDialog}">
+                <TextBlock
+                    Margin="16,0,0,0"
+                    VerticalAlignment="Center"
+                    FontSize="20"
+                    FontWeight="Bold"
+                    Text="添加" />
+                <!--  关闭按钮  -->
+                <Button
+                    Width="40"
+                    Height="40"
+                    HorizontalAlignment="Right"
+                    Command="{Binding CloseDialog}"
+                    CommandParameter="{Binding ElementName=MenuDialog}"
+                    FontSize="20"
+                    Style="{StaticResource closeStyle}">
                     <Button.Template>
                         <ControlTemplate>
-                            <TextBlock Text="&#xe606;"   HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="/Resource/#iconfont" />
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontFamily="/Resource/#iconfont"
+                                Text="&#xe606;" />
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
@@ -43,29 +65,44 @@
                             <ColumnDefinition Width="auto" />
                         </Grid.ColumnDefinitions>
                         <TextBox
-                        Text="{Binding Menu.Target}"
-                        hc:InfoElement.Title="路径"
-                        hc:InfoElement.TitleWidth="70"
-                        ToolTip="应用,文件,文件夹的路径;组件应用"
-                        hc:InfoElement.TitlePlacement="Left"
-                        hc:InfoElement.Necessary="True"
-                        Style="{StaticResource TextBoxExtend}"
-                        Margin="0,0,0,0" />
-                        <hc:ButtonGroup Orientation="Horizontal" Grid.Column="1">
-                            <Button ToolTip="选择文件" Content="文件" Command="{Binding ChooseFilePath}"  Margin="1 0 0 0" Style="{DynamicResource ButtonPrimary}" />
-                            <Button Content="文件夹" ToolTip="选择文件夹" Command="{Binding ChooseDirPath}"  Margin="1 0 0 0" Style="{DynamicResource ButtonPrimary}" />
+                            Margin="0,0,0,0"
+                            hc:InfoElement.Necessary="True"
+                            hc:InfoElement.Title="路径"
+                            hc:InfoElement.TitlePlacement="Left"
+                            hc:InfoElement.TitleWidth="70"
+                            Style="{StaticResource TextBoxExtend}"
+                            Text="{Binding Menu.Target}"
+                            ToolTip="应用,文件,文件夹的路径;组件应用" />
+                        <hc:ButtonGroup Grid.Column="1" Orientation="Horizontal">
+                            <Button
+                                Margin="1,0,0,0"
+                                Command="{Binding ChooseFilePath}"
+                                Content="文件"
+                                Style="{DynamicResource ButtonPrimary}"
+                                ToolTip="选择文件" />
+                            <Button
+                                Margin="1,0,0,0"
+                                Command="{Binding ChooseDirPath}"
+                                Content="文件夹"
+                                Style="{DynamicResource ButtonPrimary}"
+                                ToolTip="选择文件夹" />
                         </hc:ButtonGroup>
                     </Grid>
                     <TextBox
-                        Text="{Binding Menu.MenuName}"
-                        hc:InfoElement.Title="名称"
-                        ToolTip="给它起个名字便于区分"
-                        hc:InfoElement.TitleWidth="70"
-                        hc:InfoElement.TitlePlacement="Left"
+                        Margin="0,16,0,0"
                         hc:InfoElement.Necessary="True"
+                        hc:InfoElement.Title="名称"
+                        hc:InfoElement.TitlePlacement="Left"
+                        hc:InfoElement.TitleWidth="70"
                         Style="{StaticResource TextBoxExtend}"
-                        Margin="0,16,0,0" />
-                    <Button Content="确定" Style="{StaticResource ButtonPrimary}" Command="{Binding AddMenu}" HorizontalAlignment="Center" Margin="0 20 0 0" />
+                        Text="{Binding Menu.MenuName}"
+                        ToolTip="给它起个名字便于区分" />
+                    <Button
+                        Margin="0,20,0,0"
+                        HorizontalAlignment="Center"
+                        Command="{Binding AddMenu}"
+                        Content="确定"
+                        Style="{StaticResource ButtonPrimary}" />
                 </StackPanel>
             </Grid>
         </hc:Card>
