@@ -91,28 +91,43 @@ namespace ModernBoxes
         /// </summary>
         private async void initConfig()
         {
-            String config = await FileHelper.ReadFile($"{Environment.CurrentDirectory}\\AllCardsConfig.json");
-            //当配置文件被误删之后重新生成卡片配置文件
-            if ((ConfigHelper.getConfig("isFirst")) == String.Empty||config.Length<8)
+            try
             {
-                ConfigHelper.setConfig("isFirst", "true");
-                //默认展开的地方在右侧
-                ConfigHelper.setConfig("compontentLayout", CommentLayout.right);
-                //首次使用创建缓存文件夹
-                Directory.CreateDirectory($"{Environment.CurrentDirectory}\\DirCache");
-                Directory.CreateDirectory($"{Environment.CurrentDirectory}\\FileCache");
-                //默认设置不自启动
-                ConfigHelper.setConfig("autoOpen", false);
-                //卡片配置文件生成
-                CardApps.Add(new CardContentModel() { CardName = "一言", IsChecked = true, CardID = 0, CardHeight = 100, Priview = "/Resource/image/previews/onenote1.png" });
-                CardApps.Add(new CardContentModel() { CardName = "应用", IsChecked = true, CardID = 1, CardHeight = 235, Priview = "/Resource/image/previews/application.png" });
-                CardApps.Add(new CardContentModel() { CardName = "文件夹", IsChecked = true, CardID = 2, CardHeight = 235, Priview = "/Resource/image/previews/dir1.png" });
-                CardApps.Add(new CardContentModel() { CardName = "文件", IsChecked = true, CardID = 3, CardHeight = 235, Priview = "/Resource/image/previews/file1.png" });
-                CardApps.Add(new CardContentModel() { CardName = "便签", IsChecked = false, CardID = 4, CardHeight = 235, Priview = "/Resource/image/previews/notes1.png" });
-                string CardJson = JsonConvert.SerializeObject(CardApps);
-                await FileHelper.WriteFile($"{Environment.CurrentDirectory}\\AllCardsConfig.json", CardJson);
-                //设置默认主题为光明色
-                ConfigHelper.setConfig("theme",MyEnum.Theme.light);
+                if (File.Exists($"{Environment.CurrentDirectory}\\AllCardsConfig.json"))
+                {
+                    String config = await FileHelper.ReadFile($"{Environment.CurrentDirectory}\\AllCardsConfig.json");
+                    if ((ConfigHelper.getConfig("isFirst")) == String.Empty || config.Length < 8)
+                    {
+                        ConfigHelper.setConfig("isFirst", "true");
+                        //默认展开的地方在右侧
+                        ConfigHelper.setConfig("compontentLayout", CommentLayout.right);
+                        //首次使用创建缓存文件夹
+                        Directory.CreateDirectory($"{Environment.CurrentDirectory}\\DirCache");
+                        Directory.CreateDirectory($"{Environment.CurrentDirectory}\\FileCache");
+                        //默认设置不自启动
+                        ConfigHelper.setConfig("autoOpen", false);
+                        //卡片配置文件生成
+                        CardApps.Add(new CardContentModel() { CardName = "一言", IsChecked = true, CardID = 0, CardHeight = 100, Priview = "/Resource/image/previews/onenote1.png" });
+                        CardApps.Add(new CardContentModel() { CardName = "应用", IsChecked = true, CardID = 1, CardHeight = 235, Priview = "/Resource/image/previews/application.png" });
+                        CardApps.Add(new CardContentModel() { CardName = "文件夹", IsChecked = true, CardID = 2, CardHeight = 235, Priview = "/Resource/image/previews/dir1.png" });
+                        CardApps.Add(new CardContentModel() { CardName = "文件", IsChecked = true, CardID = 3, CardHeight = 235, Priview = "/Resource/image/previews/file1.png" });
+                        CardApps.Add(new CardContentModel() { CardName = "便签", IsChecked = false, CardID = 4, CardHeight = 235, Priview = "/Resource/image/previews/notes1.png" });
+                        string CardJson = JsonConvert.SerializeObject(CardApps);
+                        await FileHelper.WriteFile($"{Environment.CurrentDirectory}\\AllCardsConfig.json", CardJson);
+                        //设置默认主题为光明色
+                        ConfigHelper.setConfig("theme", MyEnum.Theme.light);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                BaseDialog baseDialog = new BaseDialog();
+                baseDialog.SetTitle("错误..");
+                baseDialog.SetWidth(400);
+                UcMessageDialog ucMessageDialog = new UcMessageDialog(ex.Message, MyEnum.MessageDialogState.danger);
+                baseDialog.SetContent(ucMessageDialog);
+                baseDialog.ShowDialog();
+                //当配置文件被误删之后重新生成卡片配置文件
             }
         }
 

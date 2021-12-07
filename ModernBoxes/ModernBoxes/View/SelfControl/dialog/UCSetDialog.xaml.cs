@@ -28,10 +28,7 @@ namespace ModernBoxes.View.SelfControl.dialog
             CommentLayout layoutOration = (CommentLayout)Enum.Parse(typeof(CommentLayout), ConfigHelper.getConfig("compontentLayout"));
             RB_ShowLeft.IsChecked = layoutOration == CommentLayout.left ? true : false;
             RB_ShowRight.IsChecked = layoutOration == CommentLayout.right ? true : false;
-            //设置软件宽高数据初始化
-            S_MainWindowHeight.Maximum = SystemParameters.WorkArea.Height;
-            S_MainWindowHeight.Value = MainWindow.DoGetMainWindowHeight();
-
+           
             S_CompontentWidth.Maximum = 420;
             S_CompontentWidth.Value = MainWindow.DoGetCompontentWidth();
 
@@ -101,15 +98,7 @@ namespace ModernBoxes.View.SelfControl.dialog
             MainWindow.DoCloseCompontentLayout();
         }
 
-        /// <summary>
-        /// 修改主界面的高
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void S_MainWindowHeight_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            MainWindow.DoSetMainWindowHeight(S_MainWindowHeight.Value);
-        }
+        
 
         private void S_CompontentWidth_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
@@ -124,8 +113,8 @@ namespace ModernBoxes.View.SelfControl.dialog
         private void RadioButton_Click(object sender, RoutedEventArgs e)
         {
             AutoOpenSoftware autoOpenSoftware = new AutoOpenSoftware();
-            autoOpenSoftware.SetAutoStart(true);
             ConfigHelper.setConfig("autoOpen", true);
+            autoOpenSoftware.SetAutoStart(true);
         }
 
         /// <summary>
@@ -137,6 +126,7 @@ namespace ModernBoxes.View.SelfControl.dialog
         {
             AutoOpenSoftware autoOpenSoftware = new AutoOpenSoftware();
             autoOpenSoftware.SetAutoStart(false);
+            //autoOpenSoftware.setOpen(false);
             ConfigHelper.setConfig("autoOpen", false);
         }
     }

@@ -14,6 +14,16 @@ namespace ModernBoxes.View.SelfControl
         {
             InitializeComponent();
             Messenger.Default.Register<Boolean>(this, "IsCloseBaseDialog", closeBaseDialog);
+            Messenger.Default.Register<Boolean>(this, "IsChooseOk", ClickOkButton);
+        }
+
+        /// <summary>
+        /// 点击对话框中的确认按钮
+        /// </summary>
+        /// <param name="obj"></param>
+        private void ClickOkButton(bool obj)
+        {
+            
         }
 
         public void closeBaseDialog(Boolean bol)

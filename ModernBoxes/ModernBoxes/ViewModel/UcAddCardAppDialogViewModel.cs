@@ -71,7 +71,6 @@ namespace ModernBoxes.ViewModel
             {
                 File.Delete($"{Environment.CurrentDirectory}\\AllCardsConfig.json");
             }
-
             string newJson = JsonConvert.SerializeObject(CardApps);
             await FileHelper.WriteFile($"{Environment.CurrentDirectory}\\AllCardsConfig.json", newJson);
             UcCompontentViewModel.DoloadCardContent();

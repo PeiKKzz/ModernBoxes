@@ -8,7 +8,8 @@ namespace ModernBoxes.Tool
     {
         public static async Task<bool> WriteFile(String path, String Content)
         {
-            FileStream fileStream = new FileStream(path, FileMode.OpenOrCreate);
+            File.Exists(path);
+            FileStream fileStream = new FileStream(path, FileMode.Create,FileAccess.Write,FileShare.Read);
             StreamWriter streamWriter = new StreamWriter(fileStream);
             try
             {
@@ -28,11 +29,18 @@ namespace ModernBoxes.Tool
 
         public static async Task<String> ReadFile(String path)
         {
-            FileStream fileStream = new FileStream(path, FileMode.Open);
+            //FileStream fileStream = new FileStream(path, FileMode.Open);
+            //StreamReader streamReader = new StreamReader(fileStream);
+            //String content = streamReader.ReadToEnd();
+            //streamReader.Close();
+            //fileStream.Close();
+
+            var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
             StreamReader streamReader = new StreamReader(fileStream);
             String content = streamReader.ReadToEnd();
             streamReader.Close();
             fileStream.Close();
+
             return content;
         }
 

@@ -127,12 +127,9 @@ namespace ModernBoxes.ViewModel
                     }
                 });
             }
-            catch (Exception ex)
+            catch
             {
-                BaseDialog baseDialog = new BaseDialog();
-                baseDialog.SetTitle("错误");
-                baseDialog.SetContent(new UcMessageDialog(ex.Message, MyEnum.MessageDialogState.danger));
-                baseDialog.ShowDialog();
+
             }
         }
     }

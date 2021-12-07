@@ -1,8 +1,12 @@
 ﻿using IWshRuntimeLibrary; //添加引用，在 Com 中搜索 Windows Script Host Object Model
+using Microsoft.Win32;
+using ModernBoxes.View.SelfControl;
+using ModernBoxes.View.SelfControl.dialog;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Security;
 
 namespace ModernBoxes.Tool
 {
@@ -83,8 +87,7 @@ namespace ModernBoxes.Tool
                 }
             }
 
-            //创建桌面快捷方式
-            //this.CreateDesktopQuick(desktopPath, quickName, appAllPath);
+
         }
 
         /// <summary>
@@ -208,6 +211,50 @@ namespace ModernBoxes.Tool
             {
                 this.CreateShortcut(desktopPath, quickName, appPath, "软件描述");
             }
+        }
+
+
+
+
+        public bool setOpen(Boolean bol)
+        {
+            try
+            {
+                if (bol)
+                {
+                    string strName = AppDomain.CurrentDomain.BaseDirectory + "ModernBoxes.exe";//获取要自动运行的应用程序名
+                    if (!System.IO.File.Exists(strName))//判断要自动运行的应用程序文件是否存在
+                        return false;
+                    string strnewName = strName.Substring(strName.LastIndexOf("\\") + 1);//获取应用程序文件名，不包括路径
+                    RegistryKey registry = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);//检索指定的子项
+                    if (registry == null)//若指定的子项不存在
+                        registry = Registry.LocalMachine.CreateSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run");//则创建指定的子项
+                    registry.SetValue(strnewName, strName);//设置该子项的新的“键值对”
+                }
+                else
+                {
+                    string strName = AppDomain.CurrentDomain.BaseDirectory + "ModernBoxes.exe";//获取要自动运行的应用程序名
+                    if (!System.IO.File.Exists(strName))//判断要取消的应用程序文件是否存在
+                        return false;
+                    string strnewName = strName.Substring(strName.LastIndexOf("\\") + 1);///获取应用程序文件名，不包括路径
+                    RegistryKey registry = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);//读取指定的子项
+                    if (registry == null)//若指定的子项不存在
+                        registry = Registry.LocalMachine.CreateSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run");//则创建指定的子项
+                    registry.DeleteValue(strnewName, false);//删除指定“键名称”的键/值对 
+                }
+                return true;
+            }
+            catch(SecurityException ex)
+            {
+                BaseDialog baseDialog = new BaseDialog();
+                baseDialog.SetTitle("警告");
+                baseDialog.SetHeight(170);
+                UcMessageDialog ucMessage = new UcMessageDialog("没有管理员身份是无法使用这一神奇的功能的", MyEnum.MessageDialogState.waring);
+                baseDialog.SetContent(ucMessage);
+                baseDialog.ShowDialog();
+                return false;
+            }
+            
         }
     }
 }
