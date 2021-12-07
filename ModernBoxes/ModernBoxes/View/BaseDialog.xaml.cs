@@ -98,6 +98,7 @@ namespace ModernBoxes.View.SelfControl
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Messenger.Default.Send<Boolean>(true, "ClosingDialog");
+            Messenger.Default.Send<Boolean>(true, "IsSaveConfigData");
             this.Close();
         }
 

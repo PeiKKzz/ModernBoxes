@@ -1,4 +1,5 @@
-﻿using ModernBoxes.MyEnum;
+﻿using GalaSoft.MvvmLight.Messaging;
+using ModernBoxes.MyEnum;
 using ModernBoxes.Tool;
 using System;
 using System.Linq;
@@ -16,6 +17,18 @@ namespace ModernBoxes.View.SelfControl.dialog
         {
             InitializeComponent();
             init();
+            Messenger.Default.Register<Boolean>(this, "IsSaveConfigData", SaveConfigData);
+            
+        }
+
+        /// <summary>
+        /// 保存数据
+        /// </summary>
+        /// <param name="obj"></param>
+        private void SaveConfigData(bool obj)
+        {
+            //保存组件宽度的数据
+            ConfigHelper.setConfig("ComponentWidth", S_CompontentWidth.Value);
         }
 
         /// <summary>
@@ -56,6 +69,8 @@ namespace ModernBoxes.View.SelfControl.dialog
                 RB_Dark.IsChecked = true;
                 RB_light.IsChecked = false;
             }
+
+            RB_HoverOpen.IsChecked = Boolean.Parse(ConfigHelper.getConfig("IsHover"));
         }
 
         /// <summary>
@@ -99,7 +114,11 @@ namespace ModernBoxes.View.SelfControl.dialog
         }
 
         
-
+        /// <summary>
+        /// 设置组件宽度
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void S_CompontentWidth_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             MainWindow.DoSetCompontentWidth(S_CompontentWidth.Value);
@@ -128,6 +147,16 @@ namespace ModernBoxes.View.SelfControl.dialog
             autoOpenSoftware.SetAutoStart(false);
             //autoOpenSoftware.setOpen(false);
             ConfigHelper.setConfig("autoOpen", false);
+        }
+
+        private void RB_HoverOpen_Click(object sender, RoutedEventArgs e)
+        {
+            ConfigHelper.setConfig("IsHover", RB_HoverOpen.IsChecked);
+        }
+
+        private void RB_HoverClose_Click(object sender, RoutedEventArgs e)
+        {
+            ConfigHelper.setConfig("IsHover", RB_HoverOpen.IsChecked);
         }
     }
 }

@@ -67,6 +67,8 @@ namespace ModernBoxes
             GetCompontentWidthEvent += MainWindow_GetCompontentWidthEvent;
             SetCompontentWidthEvent += MainWindow_SetCompontentWidthEvent;
 
+            
+
             if (ConfigHelper.getConfig("x") != String.Empty)
             {
                 //按照上一次固定的位置显示程序
@@ -84,6 +86,12 @@ namespace ModernBoxes
             loadComment();
             //设置主题颜色
             ChangeTheme.SetTheme((Theme)Enum.Parse(typeof(MyEnum.Theme), ConfigHelper.getConfig("theme")));
+            //设置组件区域的整体宽度
+            string ComponentWidth = ConfigHelper.getConfig("ComponentWidth");
+            if (ComponentWidth != String.Empty&& ComponentWidth != null)
+            {
+                SetCompontentWidthEvent(Double.Parse(ComponentWidth));
+            }
         }
 
         /// <summary>
@@ -116,6 +124,10 @@ namespace ModernBoxes
                         await FileHelper.WriteFile($"{Environment.CurrentDirectory}\\AllCardsConfig.json", CardJson);
                         //设置默认主题为光明色
                         ConfigHelper.setConfig("theme", MyEnum.Theme.light);
+                        //设置是否悬停
+                        ConfigHelper.setConfig("IsHover", false);
+                        //设置悬停位置
+                        ConfigHelper.setConfig("HoverPosition", HoverPosition.LEFT);
                     }
                 }
             }
@@ -341,5 +353,7 @@ namespace ModernBoxes
             MainViewModel.DoDeleteMenuItem(menuName);
             MainViewModel.DoRefershMenu();
         }
+
+      
     }
 }

@@ -48,7 +48,50 @@
                         Content="主窗体"
                         FontSize="22"
                         LineStrokeThickness="2" />
-
+                    <StackPanel Margin="10" Orientation="Horizontal">
+                        <TextBlock />
+                        <TextBlock Style="{StaticResource TextBlockTitle}" Text="木函悬停" />
+                        <RadioButton
+                            x:Name="RB_HoverOpen"
+                            Margin="20,0,0,0"
+                            Background="{DynamicResource SecondaryRegionBrush}"
+                            Click="RB_HoverOpen_Click"
+                            Content="开启"
+                            IsChecked="false"
+                            Style="{StaticResource RadioButtonIcon}" />
+                        <RadioButton
+                            x:Name="RB_HoverClose"
+                            Margin="10,0,0,0"
+                            Background="{DynamicResource SecondaryRegionBrush}"
+                            Click="RB_HoverClose_Click"
+                            Content="关闭"
+                            IsChecked="{Binding ElementName=RB_HoverOpen, Path=IsChecked, Converter={StaticResource reverseBoolConvert}}"
+                            Style="{StaticResource RadioButtonIcon}" />
+                    </StackPanel>
+                    <StackPanel
+                        Margin="10"
+                        IsEnabled="{Binding ElementName=RB_HoverOpen, Path=IsChecked}"
+                        Orientation="Horizontal">
+                        <TextBlock />
+                        <TextBlock Style="{StaticResource TextBlockTitle}" Text="悬停位置" />
+                        <RadioButton
+                            x:Name="RB_HoverLeft"
+                            Margin="20,0,0,0"
+                            Background="{DynamicResource SecondaryRegionBrush}"
+                            Content="左侧悬停"
+                            IsChecked="True"
+                            Style="{StaticResource RadioButtonIcon}" />
+                        <RadioButton
+                            x:Name="RB_HoverRight"
+                            Margin="10,0,0,0"
+                            Background="{DynamicResource SecondaryRegionBrush}"
+                            Content="右侧悬停"
+                            IsChecked="{Binding ElementName=RB_HoverLeft, Path=IsChecked, Converter={StaticResource reverseBoolConvert}}"
+                            Style="{StaticResource RadioButtonIcon}" />
+                    </StackPanel>
+                    <StackPanel Margin="10" Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource TextBlockTitle}" Text="唤出方式" />
+                    </StackPanel>
                     <hc:Divider
                         HorizontalContentAlignment="Left"
                         Content="卡片应用"
