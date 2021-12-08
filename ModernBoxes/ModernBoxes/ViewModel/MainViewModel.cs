@@ -105,6 +105,20 @@ namespace ModernBoxes.ViewModel
             RefreshMenuEvent += MainViewModel_RefreshMenuEvent;
             DeleteMenuItemEvent += MainViewModel_DeleteMenuItemEvent;
             loadMenu();
+            Messenger.Default.Register<Boolean>(this, "IsRefreshMainMenu", RefreshMainMenu);
+        }
+        /// <summary>
+        /// 刷新主菜单
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        private void RefreshMainMenu(bool obj)
+        {
+            if (obj)
+            {
+                MenuList.Clear();
+                loadMenu();
+            }
         }
 
         /// <summary>

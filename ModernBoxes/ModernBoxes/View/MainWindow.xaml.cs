@@ -38,6 +38,9 @@ namespace ModernBoxes
 
     public delegate void SetCompontentWidthHandler(Double value);
 
+
+    public delegate void SetWindowOpacity(Double value);
+
     public partial class MainWindow : Window
     {
         public static event CloseCompontentLayoutHandler CloseCompontentLayoutEvent;
@@ -49,6 +52,8 @@ namespace ModernBoxes
         public static event getCompontentWidthHandler GetCompontentWidthEvent;
 
         public static event SetCompontentWidthHandler SetCompontentWidthEvent;
+
+        public static event SetWindowOpacity SetWindowOpacityHandlerEvent;
 
         public List<CardContentModel> CardApps = new List<CardContentModel>();
 
@@ -66,8 +71,9 @@ namespace ModernBoxes
             SetMainWindowHeightEvent += MainWindow_SetMainWindowHeightEvent;
             GetCompontentWidthEvent += MainWindow_GetCompontentWidthEvent;
             SetCompontentWidthEvent += MainWindow_SetCompontentWidthEvent;
+            SetWindowOpacityHandlerEvent += MainWindow_SetWindowOpacityHandlerEvent;
 
-            
+
 
             if (ConfigHelper.getConfig("x") != String.Empty)
             {
@@ -92,6 +98,23 @@ namespace ModernBoxes
             {
                 SetCompontentWidthEvent(Double.Parse(ComponentWidth));
             }
+            //设置窗体的透明度
+            this.Opacity = Double.Parse(ConfigHelper.getConfig("WindowOpacity"));
+        }
+
+        /// <summary>
+        /// 设置窗体透明度
+        /// </summary>
+        /// <param name="opacity"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        private void MainWindow_SetWindowOpacityHandlerEvent(double opacity)
+        {
+            this.Opacity = opacity;
+        }
+
+        public static void SetWindowOpacity(Double opacity)
+        {
+            SetWindowOpacityHandlerEvent(opacity);
         }
 
         /// <summary>
@@ -128,6 +151,8 @@ namespace ModernBoxes
                         ConfigHelper.setConfig("IsHover", false);
                         //设置悬停位置
                         ConfigHelper.setConfig("HoverPosition", HoverPosition.LEFT);
+                        //设置默认透明度为1
+                        ConfigHelper.setConfig("WindowOpacity", 1);
                     }
                 }
             }

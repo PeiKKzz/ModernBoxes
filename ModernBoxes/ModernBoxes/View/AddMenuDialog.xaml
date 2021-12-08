@@ -26,7 +26,7 @@
     <hc:TransitioningContentControl>
         <hc:Card
             Margin="5"
-            hc:BorderElement.CornerRadius="20"
+            hc:BorderElement.CornerRadius="8"
             Effect="{StaticResource EffectShadow1}">
             <Grid>
                 <Grid.RowDefinitions>

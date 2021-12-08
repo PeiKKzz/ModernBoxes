@@ -8,13 +8,35 @@ namespace ModernBoxes.View.SelfControl
     /// <summary>
     /// BaseDialog.xaml 的交互逻辑
     /// </summary>
+    /// 
+
+    public delegate void SetCompontentWidthHandler(Double opacity);
+
     public partial class BaseDialog : Window
     {
+
+        public static event SetCompontentWidthHandler SetCompontentWidthHandlerEvent;
+
         public BaseDialog()
         {
             InitializeComponent();
             Messenger.Default.Register<Boolean>(this, "IsCloseBaseDialog", closeBaseDialog);
             Messenger.Default.Register<Boolean>(this, "IsChooseOk", ClickOkButton);
+            SetCompontentWidthHandlerEvent += BaseDialog_SetCompontentWidthHandlerEvent;
+        }
+
+        /// <summary>
+        /// 设置对话框的透明度
+        /// </summary>
+        /// <param name="opacity"></param>
+        private void BaseDialog_SetCompontentWidthHandlerEvent(double opacity)
+        {
+            this.Opacity = opacity;
+        }
+
+        public static void SetDialogOpacity(Double opacity)
+        {
+            SetCompontentWidthHandlerEvent(opacity);
         }
 
         /// <summary>

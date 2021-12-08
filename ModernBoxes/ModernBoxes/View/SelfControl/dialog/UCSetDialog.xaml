@@ -19,7 +19,6 @@
             <Expander Margin="10" Header="主题">
                 <StackPanel Orientation="Vertical">
                     <StackPanel Margin="10" Orientation="Horizontal">
-                        <TextBlock />
                         <TextBlock Style="{StaticResource TextBlockTitle}" Text="主题" />
                         <RadioButton
                             x:Name="RB_light"
@@ -36,6 +35,22 @@
                             Click="RB_Dark_Click"
                             Content="黑暗系"
                             Style="{StaticResource RadioButtonIcon}" />
+                    </StackPanel>
+                    <StackPanel Margin="10" Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource TextBlockTitle}" Text="透明度" />
+                        <Slider
+                            Name="S_ModernBoxOpacity"
+                            Width="400"
+                            VerticalAlignment="Center"
+                            hc:TipElement.Placement="Top"
+                            hc:TipElement.StringFormat="#0%"
+                            hc:TipElement.Visibility="Visible"
+                            Maximum="1"
+                            Minimum="0.15"
+                            TickFrequency="0.1"
+                            TickPlacement="Both"
+                            ValueChanged="S_ModernBoxOpacity_ValueChanged"
+                            Value="5" />
                     </StackPanel>
                 </StackPanel>
             </Expander>

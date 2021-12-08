@@ -13,12 +13,14 @@ namespace ModernBoxes.View.SelfControl.dialog
     /// </summary>
     public partial class UCSetDialog : UserControl
     {
+        private Boolean IsChangeTheme = false;
+
         public UCSetDialog()
         {
             InitializeComponent();
             init();
             Messenger.Default.Register<Boolean>(this, "IsSaveConfigData", SaveConfigData);
-            
+
         }
 
         /// <summary>
@@ -29,6 +31,11 @@ namespace ModernBoxes.View.SelfControl.dialog
         {
             //保存组件宽度的数据
             ConfigHelper.setConfig("ComponentWidth", S_CompontentWidth.Value);
+            //保存窗口透明度的数据
+            ConfigHelper.setConfig("WindowOpacity", S_ModernBoxOpacity.Value);
+            //刷新主界面的菜单
+           
+                
         }
 
         /// <summary>
@@ -41,12 +48,12 @@ namespace ModernBoxes.View.SelfControl.dialog
             CommentLayout layoutOration = (CommentLayout)Enum.Parse(typeof(CommentLayout), ConfigHelper.getConfig("compontentLayout"));
             RB_ShowLeft.IsChecked = layoutOration == CommentLayout.left ? true : false;
             RB_ShowRight.IsChecked = layoutOration == CommentLayout.right ? true : false;
-           
+
             S_CompontentWidth.Maximum = 420;
             S_CompontentWidth.Value = MainWindow.DoGetCompontentWidth();
 
             String autoOpen = ConfigHelper.getConfig("autoOpen");
-            if (autoOpen != null&&autoOpen!=String.Empty)
+            if (autoOpen != null && autoOpen != String.Empty)
             {
                 if (Boolean.Parse(autoOpen))
                 {
@@ -69,8 +76,10 @@ namespace ModernBoxes.View.SelfControl.dialog
                 RB_Dark.IsChecked = true;
                 RB_light.IsChecked = false;
             }
-
+            
             RB_HoverOpen.IsChecked = Boolean.Parse(ConfigHelper.getConfig("IsHover"));
+
+            S_ModernBoxOpacity.Value = Double.Parse(ConfigHelper.getConfig("WindowOpacity"));
         }
 
         /// <summary>
@@ -81,6 +90,7 @@ namespace ModernBoxes.View.SelfControl.dialog
         private void RB_light_Click(object sender, RoutedEventArgs e)
         {
             ChangeTheme.SetTheme(Theme.light);
+            Messenger.Default.Send(true, "IsRefreshMainMenu");
         }
 
         /// <summary>
@@ -90,10 +100,11 @@ namespace ModernBoxes.View.SelfControl.dialog
         /// <param name="e"></param>
         private void RB_Dark_Click(object sender, RoutedEventArgs e)
         {
-            ChangeTheme.SetTheme(Theme.dark);   
+            ChangeTheme.SetTheme(Theme.dark);
+            Messenger.Default.Send(true, "IsRefreshMainMenu");
         }
 
-        
+
 
         /// <summary>
         /// 组件应用布局
@@ -113,7 +124,7 @@ namespace ModernBoxes.View.SelfControl.dialog
             MainWindow.DoCloseCompontentLayout();
         }
 
-        
+
         /// <summary>
         /// 设置组件宽度
         /// </summary>
@@ -157,6 +168,18 @@ namespace ModernBoxes.View.SelfControl.dialog
         private void RB_HoverClose_Click(object sender, RoutedEventArgs e)
         {
             ConfigHelper.setConfig("IsHover", RB_HoverOpen.IsChecked);
+        }
+
+
+        /// <summary>
+        /// 修改窗体透明度
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void S_ModernBoxOpacity_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            MainWindow.SetWindowOpacity(S_ModernBoxOpacity.Value);
+            //BaseDialog.SetDialogOpacity(S_ModernBoxOpacity.Value);
         }
     }
 }
