@@ -13,6 +13,8 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading;
+using System.Windows;
 
 namespace ModernBoxes.ViewModel
 {
@@ -22,6 +24,7 @@ namespace ModernBoxes.ViewModel
 
     public class MainViewModel : ViewModelBase
     {
+        public Boolean isFirst = true;
         public static event DeleteMenuItemHandler DeleteMenuItemEvent;
 
         public static event RefreshMenu RefreshMenuEvent;
@@ -127,18 +130,37 @@ namespace ModernBoxes.ViewModel
         /// <param name="menuName"></param>
         private async void MainViewModel_DeleteMenuItemEvent(string menuName)
         {
-            //当删除组件应用菜单后关闭卡片
-            if(menuName == "组件应用")
+            try
             {
-                MainWindow.DoCloseCompontentLayout();
-            }
-            MenuList.Remove(MenuList.FirstOrDefault(o => o.MenuName == menuName));
-            if (File.Exists($"{Environment.CurrentDirectory}\\MenuConfig.json"))
-            {
+                //当删除组件应用菜单后关闭卡片
+                if (menuName == "组件应用")
+                {
+                    MainWindow.DoCloseCompontentLayout();
+                }
+                //MenuList.Remove(MenuList.FirstOrDefault(o => o.MenuName == menuName));
+                //if (File.Exists($"{Environment.CurrentDirectory}\\MenuConfig.json"))
+                //{
+                //    File.Delete($"{Environment.CurrentDirectory}\\MenuConfig.json");
+                //}
+                //Trace.WriteLine(MenuList.Count + "");  //8  5
+                //String newJson = JsonConvert.SerializeObject(MenuList);
+                //Trace.WriteLine(MenuList.Count + "");  //8  5
+                //await FileHelper.WriteFile($"{Environment.CurrentDirectory}\\MenuConfig.json", newJson);  //执行完此操作后MenuList的数据被清空
+                //Trace.WriteLine(MenuList.Count + "");  //  0数据被清空
+                MenuModel? menuModel = MenuList.FirstOrDefault(x => x.MenuName == menuName);
+                MenuList.Remove(menuModel);
+                String json = JsonConvert.SerializeObject(MenuList);
                 File.Delete($"{Environment.CurrentDirectory}\\MenuConfig.json");
+                Trace.WriteLine(MenuList.Count + "");
+                await FileHelper.WriteConfig($"{Environment.CurrentDirectory}\\MenuConfig.json", json);
+                Trace.WriteLine(MenuList.Count + "");
             }
-            String newJson = JsonConvert.SerializeObject(MenuList);
-            await FileHelper.WriteFile($"{Environment.CurrentDirectory}\\MenuConfig.json", newJson);
+            catch (Exception ex)
+            {
+
+            }
+
+           // loadMenu(); //重新加载可解决问题
         }
 
         public static void DoDeleteMenuItem(String menuName)
@@ -168,6 +190,8 @@ namespace ModernBoxes.ViewModel
         private async void loadMenu()
         {
             String json = await FileHelper.ReadFile($"{Environment.CurrentDirectory}\\MenuConfig.json");
+            // json == String.empty 导致主菜单为空
+            //当删除menuitem时会全部清空并且json == String.empty
             if (json.Length > 8)
             {
                 JArray array = JArray.Parse(json);
@@ -178,6 +202,9 @@ namespace ModernBoxes.ViewModel
                         MenuList.Add(tempItem.ToObject<MenuModel>());
                 }
             }
+            isFirst = false;
         }
+
+
     }
 }

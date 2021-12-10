@@ -153,6 +153,8 @@ namespace ModernBoxes
                         ConfigHelper.setConfig("HoverPosition", HoverPosition.LEFT);
                         //设置默认透明度为1
                         ConfigHelper.setConfig("WindowOpacity", 1);
+                        //设置默认不启动
+                        ConfigHelper.setConfig("autoOpen", false);
                     }
                 }
             }

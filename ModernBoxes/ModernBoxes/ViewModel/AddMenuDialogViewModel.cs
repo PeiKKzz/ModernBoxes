@@ -69,6 +69,14 @@ namespace ModernBoxes.ViewModel
                             if (Menu.Target == "组件应用" || Menu.MenuName == "组件应用")
                             {
                                 Menu.Icon = "组件应用";
+                                if (oldJson.Contains(Menu.Target))
+                                {
+                                    BaseDialog baseDialog = new BaseDialog();
+                                    baseDialog.SetTitle("提示");
+                                    baseDialog.SetContent(new UcMessageDialog("只允许添加一个组件应用", MyEnum.MessageDialogState.waring));
+                                    baseDialog.ShowDialog();
+                                    return;
+                                }
                             }
                             if (oldJson.Length > 8)
                             {
@@ -87,7 +95,7 @@ namespace ModernBoxes.ViewModel
                                 Menus.Add(Menu);
                             }
                             String newJson = JsonConvert.SerializeObject(Menus);
-                            FileHelper.WriteFile(path, newJson);
+                            bool a = await FileHelper.WriteFile(path, newJson);
                             //刷新数据
                             MainViewModel.DoRefershMenu();
                             //关闭对话框

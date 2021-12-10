@@ -1,14 +1,16 @@
-﻿<UserControl x:Class="ModernBoxes.View.SelfControl.UcCompotent"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:ModernBoxes.View.SelfControl"
-             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             PreviewMouseWheel="UserControl_PreviewMouseWheel"
-             xmlns:hc="https://handyorg.github.io/handycontrol"
-             mc:Ignorable="d"
-             d:DesignHeight="450" d:DesignWidth="800">
+﻿<UserControl
+    x:Class="ModernBoxes.View.SelfControl.UcCompotent"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:hc="https://handyorg.github.io/handycontrol"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:local="clr-namespace:ModernBoxes.View.SelfControl"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    PreviewMouseWheel="UserControl_PreviewMouseWheel"
+    mc:Ignorable="d">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -17,8 +19,12 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <hc:TransitioningContentControl>
-        <hc:ScrollViewer Margin="0 0 0 -15" Name="ScrollViewer">
-            <ItemsControl ItemsSource="{Binding CardContents}" Name="CardApplication" Visibility="Visible" Margin="0 0 5 0">
+        <hc:ScrollViewer Name="ScrollViewer" Margin="0,0,0,-15">
+            <ItemsControl
+                Name="CardApplication"
+                Margin="0,0,5,0"
+                ItemsSource="{Binding CardContents}"
+                Visibility="Visible">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Vertical" />
@@ -26,21 +32,24 @@
                 </ItemsControl.ItemsPanel>
 
                 <ItemsControl.ItemTemplate>
-                    <!--内容区数据模板-->
+                    <!--  内容区数据模板  -->
                     <DataTemplate>
-                        <hc:Card hc:BorderElement.CornerRadius="8" Margin="0 0 0 10" Visibility="{Binding IsChecked,Converter={StaticResource isShowCardWithChecked}}">
+                        <hc:Card
+                            Margin="0,0,0,10"
+                            hc:BorderElement.CornerRadius="8"
+                            Visibility="{Binding IsChecked, Converter={StaticResource isShowCardWithChecked}}">
                             <hc:Card.Header>
                                 <TextBlock Margin="11" Text="{Binding CardName}">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="MouseDoubleClick">
-                                            <!--打开此卡片管理界面-->
+                                            <!--  打开此卡片管理界面  -->
                                             <i:InvokeCommandAction Command="" CommandParameter="" />
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </TextBlock>
                             </hc:Card.Header>
-                            <!--卡片内容-->
-                            <ContentControl  Content="{Binding CardContent}"  Height="{Binding CardHeight}" />
+                            <!--  卡片内容  -->
+                            <ContentControl Height="{Binding CardHeight}" Content="{Binding CardContent}" />
                         </hc:Card>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

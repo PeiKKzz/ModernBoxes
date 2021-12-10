@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ModernBoxes.Tool
 {
@@ -8,24 +10,42 @@ namespace ModernBoxes.Tool
     {
         public static async Task<bool> WriteFile(String path, String Content)
         {
-            File.Exists(path);
-            FileStream fileStream = new FileStream(path, FileMode.Create,FileAccess.Write,FileShare.Read);
+            FileStream fileStream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
             StreamWriter streamWriter = new StreamWriter(fileStream);
             try
             {
-                await streamWriter.WriteAsync(Content);
+                await streamWriter.WriteAsync(Content);  
             }
             catch (Exception ex)
             {
+                MessageBox.Show(ex.Message);
                 return false;
             }
             finally
             {
+                streamWriter.Flush();
+                fileStream.Flush();
                 streamWriter.Close();
                 fileStream.Close();
             }
             return true;
         }
+
+        public static async Task WriteConfig(String path,String content)
+        {
+            //创建 FileStream 类的实例
+            FileStream fileStream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
+            //定义学号
+            //将字符串转换为字节数组
+            byte[] bytes = Encoding.UTF8.GetBytes(content);
+            //向文件中写入字节数组
+            fileStream.Write(bytes, 0, bytes.Length);
+            //刷新缓冲区
+            fileStream.Flush();
+            //关闭流
+            fileStream.Close();
+        }
+
 
         public static async Task<String> ReadFile(String path)
         {
@@ -35,7 +55,7 @@ namespace ModernBoxes.Tool
             //streamReader.Close();
             //fileStream.Close();
 
-            var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            FileStream fileStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
             StreamReader streamReader = new StreamReader(fileStream);
             String content = streamReader.ReadToEnd();
             streamReader.Close();

@@ -50,7 +50,7 @@ namespace ModernBoxes.View.SelfControl.dialog
         private void Btn_Ok_Click(object sender, RoutedEventArgs e)
         {
             State = true;
-            Messenger.Default.Send(State, "IsChooseOk");
+            Messenger.Default.Send(true, "IsCloseBaseDialog");
         }
 
         private void Btn_Canel_Click(object sender, RoutedEventArgs e)

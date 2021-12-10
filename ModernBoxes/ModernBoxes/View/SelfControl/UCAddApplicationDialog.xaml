@@ -1,51 +1,68 @@
-﻿<UserControl x:Class="ModernBoxes.View.SelfControl.UCAddApplicationDialog"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:ModernBoxes.View.SelfControl"
-             xmlns:hc="https://handyorg.github.io/handycontrol"
-             mc:Ignorable="d"
-             d:DesignHeight="450" d:DesignWidth="800">
+﻿<UserControl
+    x:Class="ModernBoxes.View.SelfControl.UCAddApplicationDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:hc="https://handyorg.github.io/handycontrol"
+    xmlns:local="clr-namespace:ModernBoxes.View.SelfControl"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
     <hc:TransitioningContentControl Margin="10">
         <StackPanel Orientation="Vertical">
             <TextBox
-                hc:InfoElement.TitleWidth="140"
+                Margin="10,0,0,5"
+                hc:InfoElement.Necessary="True"
                 hc:InfoElement.Placeholder="应用名称"
-                hc:InfoElement.Necessary="True"
-                Text="{Binding AppModel.FileName}"
+                hc:InfoElement.TitleWidth="140"
                 Style="{StaticResource TextBoxExtend}"
-                Margin="10,0,0,5" />
-            <Grid Margin="0 10 0 10">
+                Text="{Binding AppModel.FileName}" />
+            <Grid Margin="0,10,0,10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition Width="auto" />
                 </Grid.ColumnDefinitions>
                 <TextBox
-                hc:InfoElement.TitleWidth="140"
-                hc:InfoElement.Placeholder="应用路径"
-                hc:InfoElement.Necessary="True"
-                Text="{Binding AppModel.AppPath}"
-                Style="{StaticResource TextBoxExtend}"
-                Margin="10,0,10,0" />
-                <Button Content="选择" Command="{Binding ChoseApplicationPath}" Grid.Column="1" VerticalAlignment="Center" Style="{StaticResource ButtonPrimary}" />
+                    Margin="10,0,10,0"
+                    hc:InfoElement.Necessary="True"
+                    hc:InfoElement.Placeholder="应用路径"
+                    hc:InfoElement.TitleWidth="140"
+                    Style="{StaticResource TextBoxExtend}"
+                    Text="{Binding AppModel.AppPath}" />
+                <Button
+                    Grid.Column="1"
+                    VerticalAlignment="Center"
+                    Command="{Binding ChoseApplicationPath}"
+                    Content="选择"
+                    Style="{StaticResource ButtonPrimary}" />
             </Grid>
-            <Grid Margin="0 10 0 10">
+            <Grid Margin="0,10,0,10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition Width="auto" />
                 </Grid.ColumnDefinitions>
                 <TextBox
-                hc:InfoElement.TitleWidth="140"
-                hc:InfoElement.Placeholder="图标路径(非必须)"
-                hc:InfoElement.Necessary="True"
-                Text="{Binding AppModel.Icon}"
-                Style="{StaticResource TextBoxExtend}"
-                Margin="10,0,10,0" />
-                <Button Content="选择" Command="{Binding ChosePhotoPath}"  Grid.Column="1" VerticalAlignment="Center" Style="{StaticResource ButtonPrimary}" />
+                    Margin="10,0,10,0"
+                    hc:InfoElement.Necessary="True"
+                    hc:InfoElement.Placeholder="图标路径(非必须)"
+                    hc:InfoElement.TitleWidth="140"
+                    Style="{StaticResource TextBoxExtend}"
+                    Text="{Binding AppModel.Icon}" />
+                <Button
+                    Grid.Column="1"
+                    VerticalAlignment="Center"
+                    Command="{Binding ChosePhotoPath}"
+                    Content="选择"
+                    Style="{StaticResource ButtonPrimary}" />
             </Grid>
 
-            <Button Content="确定" Command="{Binding AddApplication}" Style="{StaticResource ButtonPrimary}" HorizontalAlignment="Center" Margin="10" />
+            <Button
+                Margin="10"
+                HorizontalAlignment="Center"
+                Command="{Binding AddApplication}"
+                Content="确定"
+                Style="{StaticResource ButtonPrimary}" />
         </StackPanel>
     </hc:TransitioningContentControl>
 </UserControl>

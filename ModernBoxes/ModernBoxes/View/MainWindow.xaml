@@ -127,36 +127,40 @@
                                         </ItemsControl.ItemTemplate>
                                     </ItemsControl>
                                 </hc:ScrollViewer>
-                                <TextBlock
-                                    Margin="0,10,0,0"
+                                <Button
+                                    Margin="0,10,0,10"
                                     HorizontalAlignment="Center"
+                                    Command="{Binding AddMenuDialog}"
                                     FontFamily="/Resource/#iconfont"
                                     FontSize="25"
                                     Foreground="DarkGray"
-                                    Text="&#xe7c4;"
                                     ToolTip="添加">
-                                    <i:Interaction.Triggers>
-                                        <i:EventTrigger EventName="MouseLeftButtonDown">
-                                            <i:InvokeCommandAction Command="{Binding AddMenuDialog}" />
-                                        </i:EventTrigger>
-                                    </i:Interaction.Triggers>
-                                </TextBlock>
+                                    <Button.Template>
+                                        <ControlTemplate>
+                                            <TextBlock Text="&#xe7c4;" />
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Opacity" Value=".9" />
+                                                </Trigger>
+                                                <Trigger Property="IsEnabled" Value="False">
+                                                    <Setter Property="Opacity" Value="0.4" />
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
                             </StackPanel>
 
                             <StackPanel Grid.Row="1">
-                                <TextBlock
-                                    Margin="16"
+                                <Button
+                                    Name="btnConfigMenu"
+                                    Margin="8"
                                     HorizontalAlignment="Center"
+                                    Command="{Binding OpenSetDialog}"
                                     FontFamily="/Resource/#iconfont"
                                     FontSize="20"
                                     Foreground="Gray"
-                                    Text="&#xe6de;">
-                                    <i:Interaction.Triggers>
-                                        <i:EventTrigger EventName="MouseLeftButtonDown">
-                                            <i:InvokeCommandAction Command="{Binding OpenSetDialog}" />
-                                        </i:EventTrigger>
-                                    </i:Interaction.Triggers>
-                                </TextBlock>
+                                    Style="{DynamicResource BtnConfigMenuStyle}" />
                             </StackPanel>
                         </Grid>
                     </hc:Card>
