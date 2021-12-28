@@ -734,7 +734,7 @@
   },
   "packageFolders": {
     "C:\\Users\\Machu\\.nuget\\packages\\": {},
-    "D:\\DevelopmentSoftware\\visualStudio\\SDK\\NuGetPackages": {}
+    "D:\\software\\Visual Studio\\SDK\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
@@ -746,7 +746,7 @@
       "outputPath": "D:\\WareHoues\\modern-box\\ModernBoxes\\ModernBoxes\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "D:\\DevelopmentSoftware\\visualStudio\\SDK\\NuGetPackages"
+        "D:\\software\\Visual Studio\\SDK\\NuGetPackages"
       ],
       "configFilePaths": [
         "C:\\Users\\Machu\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -822,7 +822,7 @@
           },
           {
             "name": "Microsoft.NETCore.App.Host.win-x64",
-            "version": "[5.0.12, 5.0.12]"
+            "version": "[5.0.13, 5.0.13]"
           },
           {
             "name": "Microsoft.NETCore.App.Ref",
@@ -841,7 +841,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   },

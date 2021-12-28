@@ -11,6 +11,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using Microsoft.VisualBasic.FileIO;
 using System.Windows;
 
 namespace ModernBoxes.ViewModel
@@ -176,7 +177,9 @@ namespace ModernBoxes.ViewModel
                 TempFileModel? tempFileModel = TempFiles.FirstOrDefault(o => o.FilePath == FilePath);
                 if (tempFileModel != null)
                 {
-                    File.Delete(FilePath);
+                    //删除文件到回收站中
+                    FileSystem.DeleteFile(FilePath, Microsoft.VisualBasic.FileIO.UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+                    //File.Delete(FilePath);
                     String json = JsonConvert.SerializeObject(TempFiles);
                     File.Delete($"{Environment.CurrentDirectory}\\TempFileConfig.json");
                     TempFiles.Remove(tempFileModel);

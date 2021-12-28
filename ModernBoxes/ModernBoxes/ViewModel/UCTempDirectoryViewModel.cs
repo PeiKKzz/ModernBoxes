@@ -7,6 +7,7 @@ using ModernBoxes.View.SelfControl.dialog;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using Microsoft.VisualBasic.FileIO;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
@@ -142,11 +143,13 @@ namespace ModernBoxes.ViewModel
         /// 删除临时文件夹
         /// </summary>
         /// <param name="path"></param>
+        /// 
         public async void DoDeleteTempDir(String path)
         {
             TempDirModel? tempDirModel = TempDirs.FirstOrDefault(x => x.TempDirPath == path);
             TempDirs.Remove(tempDirModel);
-            Directory.Delete(tempDirModel.TempDirPath, true);
+            //Directory.Delete(tempDirModel.TempDirPath, true);
+            FileSystem.DeleteDirectory(tempDirModel.TempDirPath, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
             String json = JsonConvert.SerializeObject(TempDirs);
             File.Delete($"{Environment.CurrentDirectory}\\TempDirConfig.json");
             await FileHelper.WriteFile($"{Environment.CurrentDirectory}\\TempDirConfig.json", json);
