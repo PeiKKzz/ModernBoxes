@@ -118,7 +118,7 @@ namespace ModernBoxes.ViewModel
         /// <param name="path"></param>
         public void RemoveTempDir(String path)
         {
-            TempDirs.Remove(TempDirs.FirstOrDefault(o=>o.TempDirPath==path));
+            TempDirs.Remove(TempDirs.FirstOrDefault(o => o.TempDirPath == path));
             String newJson = JsonConvert.SerializeObject(TempDirs);
             File.Delete($"{Environment.CurrentDirectory}\\TempDirConfig.json");
             FileHelper.WriteFile($"{Environment.CurrentDirectory}\\TempDirConfig.json", newJson);
@@ -148,8 +148,20 @@ namespace ModernBoxes.ViewModel
         {
             TempDirModel? tempDirModel = TempDirs.FirstOrDefault(x => x.TempDirPath == path);
             TempDirs.Remove(tempDirModel);
-            //Directory.Delete(tempDirModel.TempDirPath, true);
-            FileSystem.DeleteDirectory(tempDirModel.TempDirPath, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+            if (Directory.Exists(path))
+            {
+                //Directory.Delete(tempDirModel.TempDirPath, true);
+                FileSystem.DeleteDirectory(tempDirModel.TempDirPath, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+            }
+            else
+            {
+                BaseDialog baseDialog = new BaseDialog();
+                baseDialog.SetTitle("提示");
+                baseDialog.SetHeight(170);
+                UcMessageDialog ucMessage = new UcMessageDialog("目标文件夹不存在,可能是被移除了", MyEnum.MessageDialogState.waring);
+                baseDialog.SetContent(ucMessage);
+                baseDialog.Show();
+            }
             String json = JsonConvert.SerializeObject(TempDirs);
             File.Delete($"{Environment.CurrentDirectory}\\TempDirConfig.json");
             await FileHelper.WriteFile($"{Environment.CurrentDirectory}\\TempDirConfig.json", json);

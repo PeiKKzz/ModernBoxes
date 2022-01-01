@@ -175,16 +175,27 @@ namespace ModernBoxes.ViewModel
             try
             {
                 TempFileModel? tempFileModel = TempFiles.FirstOrDefault(o => o.FilePath == FilePath);
-                if (tempFileModel != null)
+                String json = JsonConvert.SerializeObject(TempFiles);
+                if (File.Exists(FilePath))
                 {
-                    //删除文件到回收站中
-                    FileSystem.DeleteFile(FilePath, Microsoft.VisualBasic.FileIO.UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
-                    //File.Delete(FilePath);
-                    String json = JsonConvert.SerializeObject(TempFiles);
-                    File.Delete($"{Environment.CurrentDirectory}\\TempFileConfig.json");
-                    TempFiles.Remove(tempFileModel);
-                    await FileHelper.WriteFile($"{Environment.CurrentDirectory}\\TempFileConfig.json", json);
+                    if (tempFileModel != null)
+                    {
+                        //删除文件到回收站中
+                        FileSystem.DeleteFile(FilePath, Microsoft.VisualBasic.FileIO.UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+                        //File.Delete(FilePath);
+                    }
                 }
+                else
+                {
+                    BaseDialog baseDialog = new BaseDialog();
+                    UcMessageDialog ucMessageDialog = new UcMessageDialog("文件不存在可能是被删除了", MyEnum.MessageDialogState.waring);
+                    baseDialog.SetTitle("警告");
+                    baseDialog.SetContent(ucMessageDialog);
+                    baseDialog.ShowDialog();
+                    TempFiles.Remove(tempFileModel);
+                }
+                File.Delete($"{Environment.CurrentDirectory}\\TempFileConfig.json");
+                await FileHelper.WriteFile($"{Environment.CurrentDirectory}\\TempFileConfig.json", json);
             }
             catch (Exception ex)
             {

@@ -1,4 +1,3 @@
-D:\WareHoues\modern-box\ModernBoxes\ModernBoxes\obj\Debug\net5.0-windows\View\BaseDialog.g.cs
 D:\WareHoues\modern-box\ModernBoxes\ModernBoxes\bin\Debug\net5.0-windows\AllCardsConfig.json
 D:\WareHoues\modern-box\ModernBoxes\ModernBoxes\bin\Debug\net5.0-windows\App.config
 D:\WareHoues\modern-box\ModernBoxes\ModernBoxes\bin\Debug\net5.0-windows\MenuConfig.json
@@ -73,6 +72,7 @@ D:\WareHoues\modern-box\ModernBoxes\ModernBoxes\obj\Debug\net5.0-windows\View\Se
 D:\WareHoues\modern-box\ModernBoxes\ModernBoxes\obj\Debug\net5.0-windows\View\SelfControl\UCusedApplications.baml
 D:\WareHoues\modern-box\ModernBoxes\ModernBoxes\obj\Debug\net5.0-windows\App.baml
 D:\WareHoues\modern-box\ModernBoxes\ModernBoxes\obj\Debug\net5.0-windows\View\AddMenuDialog.g.cs
+D:\WareHoues\modern-box\ModernBoxes\ModernBoxes\obj\Debug\net5.0-windows\View\BaseDialog.g.cs
 D:\WareHoues\modern-box\ModernBoxes\ModernBoxes\obj\Debug\net5.0-windows\View\MainWindow.g.cs
 D:\WareHoues\modern-box\ModernBoxes\ModernBoxes\obj\Debug\net5.0-windows\View\SelfControl\dialog\AddTempDirDialog.g.cs
 D:\WareHoues\modern-box\ModernBoxes\ModernBoxes\obj\Debug\net5.0-windows\View\SelfControl\dialog\AddTempFileDialog.g.cs
