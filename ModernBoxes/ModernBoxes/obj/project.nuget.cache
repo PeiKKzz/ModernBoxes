@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "S4Q5HpY7+4qs8N3wei6x9YztE0IlZvYGovLv8GNjJ+K9AWxkYBPzOjC8OAqPhEcPtkQV5uzc1/fjwO4PsfgpQA==",
+  "dgSpecHash": "67EQtf583AGNW/KGS8LnwHZnrEXrjYqOvYbgyj8o1j2h1doAWLTvity7DG49pdOpfwURUvAj2eznNQOdgjNvbA==",
   "success": true,
   "projectFilePath": "D:\\WareHoues\\modern-box\\ModernBoxes\\ModernBoxes\\ModernBoxes.csproj",
   "expectedPackageFiles": [
@@ -12,11 +12,7 @@
     "C:\\Users\\Machu\\.nuget\\packages\\restsharp\\106.13.0\\restsharp.106.13.0.nupkg.sha512",
     "C:\\Users\\Machu\\.nuget\\packages\\sharpvectors\\1.7.6\\sharpvectors.1.7.6.nupkg.sha512",
     "C:\\Users\\Machu\\.nuget\\packages\\system.drawing.common\\5.0.2\\system.drawing.common.5.0.2.nupkg.sha512",
-    "C:\\Users\\Machu\\.nuget\\packages\\system.windows.interactivity.wpf\\2.0.20525\\system.windows.interactivity.wpf.2.0.20525.nupkg.sha512",
-    "C:\\Users\\Machu\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.13\\microsoft.netcore.app.host.win-x64.5.0.13.nupkg.sha512",
-    "C:\\Users\\Machu\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\5.0.0\\microsoft.aspnetcore.app.ref.5.0.0.nupkg.sha512",
-    "C:\\Users\\Machu\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\5.0.0\\microsoft.windowsdesktop.app.ref.5.0.0.nupkg.sha512",
-    "C:\\Users\\Machu\\.nuget\\packages\\microsoft.netcore.app.ref\\5.0.0\\microsoft.netcore.app.ref.5.0.0.nupkg.sha512"
+    "C:\\Users\\Machu\\.nuget\\packages\\system.windows.interactivity.wpf\\2.0.20525\\system.windows.interactivity.wpf.2.0.20525.nupkg.sha512"
   ],
   "logs": [
     {
